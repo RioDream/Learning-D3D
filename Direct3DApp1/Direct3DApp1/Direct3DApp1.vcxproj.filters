@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="通用">
+      <UniqueIdentifier>3d02fef6-d2c6-46a4-8abf-913ef2a25d1f</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资产">
+      <UniqueIdentifier>d1a867c8-e519-43f2-a9f8-bd3843346c00</UniqueIdentifier>
+    </Filter>
+    <Page Include="Common\StandardStyles.xaml">
+      <Filter>通用</Filter>
+    </Page>
+    <Image Include="Assets\Logo.png">
+      <Filter>资产</Filter>
+    </Image>
+    <Image Include="Assets\SmallLogo.png">
+      <Filter>资产</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.png">
+      <Filter>资产</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.png">
+      <Filter>资产</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
