@@ -20,6 +20,7 @@ class Direct3DContentProvider : public Microsoft::WRL::RuntimeClass<
     IDrawingSurfaceBackgroundContentProviderNative>
 {
 public:
+	//构造函数，从参数表可以看出 background 起到了 controller的作用
     Direct3DContentProvider(StarterKitPhoneComponent::Direct3DBackground^ controller);
 
     // IDrawingSurfaceContentProviderNative
@@ -30,6 +31,6 @@ public:
     HRESULT STDMETHODCALLTYPE Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceContext1* context, _In_ ID3D11RenderTargetView* renderTargetView);
 
 private:
-    StarterKitPhoneComponent::Direct3DBackground^ m_controller;
-    Microsoft::WRL::ComPtr<IDrawingSurfaceRuntimeHostNative> m_host;
+    StarterKitPhoneComponent::Direct3DBackground^ m_controller; //可以看出 background 起到了 controller的作用
+    Microsoft::WRL::ComPtr<IDrawingSurfaceRuntimeHostNative> m_host; 
 };

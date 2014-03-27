@@ -18,10 +18,12 @@ namespace PhoneDirect3DXamlAppInterop
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        //背景和前景
         private Direct3DBackground m_d3dBackground = new Direct3DBackground();
         private object m_d3dContentProvider = null;
 
-        private List<Color> m_colors;
+        //变量们
+        private List<Color> m_colors; //存储teapot的各种颜色
         private int m_colorIndex;
         private int m_hitCountCube;
         private int m_hitCountSphere;
@@ -33,8 +35,10 @@ namespace PhoneDirect3DXamlAppInterop
         public MainPage()
         {
             InitializeComponent();
-            var violet = Color.FromArgb(255, 238, 130, 238);
-            var indigo = Color.FromArgb(255, 75, 0, 130);
+
+            //预先定义几个颜色，放到m_colors中
+            var violet = Color.FromArgb(255, 238, 130, 238);  //紫色
+            var indigo = Color.FromArgb(255, 75, 0, 130); //蓝色
             m_colors = new List<Color> { Colors.Red, violet, indigo, Colors.Blue, Colors.Yellow, Colors.Orange };
         }
 
@@ -43,6 +47,8 @@ namespace PhoneDirect3DXamlAppInterop
             SetBackgroundResolution();
         }
 
+
+        // <-按钮响应,调用ChangeObjectColor改变 teapot颜色
         private void OnPreviousColorPressed(object sender, EventArgs e)
         {
             m_colorIndex--;
@@ -52,6 +58,7 @@ namespace PhoneDirect3DXamlAppInterop
             ChangeObjectColor("Teapot_Node", m_colorIndex);
         }
 
+        // ->按钮响应,调用ChangeObjectColor改变 teapot颜色
         private void OnNextColorPressed(object sender, EventArgs e)
         {
             m_colorIndex++;
@@ -61,18 +68,23 @@ namespace PhoneDirect3DXamlAppInterop
             ChangeObjectColor("Teapot_Node", m_colorIndex);
         }
 
+        
         private void ChangeObjectColor(String objectName, int colorIndex)
         {
             var color = m_colors[colorIndex];
             m_d3dBackground.ChangeMaterialColor(objectName, color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
         }
 
+        //处理 tap 事件 
         private void DrawingSurfaceBackground_Tap(object sender, GestureEventArgs e)
         {
+
+            //点击的坐标
             var currentPoint = e.GetPosition(null);
             
             double tmp = 0;
 
+            // 根据手机的orientation转换得到在渲染界面中的坐标
             // Rotate the point to get it relative to the 
             // native rendering surface instead of the XAML rendering surface
             switch (Orientation)
@@ -153,14 +165,17 @@ namespace PhoneDirect3DXamlAppInterop
             // Set render resolution to the full native resolution
             m_d3dBackground.RenderResolution = m_d3dBackground.NativeResolution;
 
+            //将背景方向改变
             m_d3dBackground.Orientation = ConvertToNativeOrientation(this.Orientation);
         }
 
+        //将dips转换为pixel
         private static double DipsToPixels(double dips)
         {
             return Math.Floor(dips * Application.Current.Host.Content.ScaleFactor / 100.0f + 0.5f);
         }
 
+        //将xamlOrientation 转换为 NativeOrientation
         private static DisplayOrientations ConvertToNativeOrientation(PageOrientation xamlOrientation)
         {
             switch (xamlOrientation)

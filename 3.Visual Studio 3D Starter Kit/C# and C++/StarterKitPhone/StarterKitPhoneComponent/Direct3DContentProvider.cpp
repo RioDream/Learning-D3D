@@ -10,9 +10,11 @@
 
 using namespace StarterKitPhoneComponent;
 
+//使用background作为controller来构造 contentProvider
 Direct3DContentProvider::Direct3DContentProvider(Direct3DBackground^ controller) :
     m_controller(controller)
 {
+	//注册RequestAdditionalFrame事件的响应函数为 m_host->RequestAdditionalFrame()
     m_controller->RequestAdditionalFrame += ref new RequestAdditionalFrameHandler([=] ()
     {
         if (m_host)
@@ -22,6 +24,8 @@ Direct3DContentProvider::Direct3DContentProvider(Direct3DBackground^ controller)
     });
 }
 
+
+//一下这些方法都调用 其background的同名方法
 // IDrawingSurfaceContentProviderNative interface
 HRESULT Direct3DContentProvider::Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device)
 {

@@ -72,6 +72,9 @@
     <MeshContentTask Include="..\..\Shared\Assets\teapot.fbx">
       <Filter>Shared\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="..\..\Shared\Assets\female head_fbx.FBX">
+      <Filter>Shared\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Shared\Assets\CubeUVImage.png">

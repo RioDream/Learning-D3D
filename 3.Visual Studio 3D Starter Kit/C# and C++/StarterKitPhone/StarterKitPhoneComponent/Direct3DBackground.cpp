@@ -19,18 +19,21 @@ using namespace Windows::Phone::Input::Interop;
 namespace StarterKitPhoneComponent
 {
 
+	//构造函数
     Direct3DBackground::Direct3DBackground() :
         m_timer(ref new BasicTimer()),
         m_deviceReady(false)
     {
     }
 
+	//
     IDrawingSurfaceBackgroundContentProvider^ Direct3DBackground::CreateContentProvider()
     {
         ComPtr<Direct3DContentProvider> provider = Make<Direct3DContentProvider>(this);
         return reinterpret_cast<IDrawingSurfaceBackgroundContentProvider^>(provider.Detach());
     }
 
+	//注册一堆事件响应函数到manipulationHost
     // IDrawingSurfaceManipulationHandler
     void Direct3DBackground::SetManipulationHost(DrawingSurfaceManipulationHost^ manipulationHost)
     {

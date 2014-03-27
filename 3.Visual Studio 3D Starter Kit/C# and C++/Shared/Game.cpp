@@ -52,8 +52,8 @@ void Game::CreateWindowSizeDependentResources()
     // setup camera for our scene
     //
     m_graphics.GetCamera().SetViewport((UINT)m_windowBounds.Width, (UINT)m_windowBounds.Height);
-    m_graphics.GetCamera().SetPosition(XMFLOAT3(0.0f, 6.0f, -18.0f));
-    m_graphics.GetCamera().SetLookAt(XMFLOAT3(0.0f, 0.0f, 0.0f));
+    m_graphics.GetCamera().SetPosition(XMFLOAT3(0.0f, 6.0f, -18.0f*4)); //#LA
+    m_graphics.GetCamera().SetLookAt(XMFLOAT3(0.0f, 0.0f, 0.0f)); //#LA
 
     float fovAngleY = 70.0f * XM_PI / 180.0f;
 
@@ -114,15 +114,17 @@ void Game::Initialize()
     //
     std::vector<Mesh*> tempModels;
 
-    Mesh::LoadFromFile(
+    //
+	Mesh::LoadFromFile(
         m_graphics, 
-        L"teapot.cmo", 
+        L"female head_fbx.cmo", 
         L"", 
         L"Folder", 
         tempModels
         );
 
-    m_meshModels.push_back(tempModels[0]);
+
+    m_meshModels.push_back(tempModels[2]); //#LA
 
     //
     // create teapot transform
@@ -197,7 +199,7 @@ void Game::Render()
         XMMATRIX modelTransform = rotation;
 
         String^ meshName = ref new String(m_meshModels[i]->Name());
-        if (String::CompareOrdinal(meshName, L"Teapot_Node") == 0)
+        if (String::CompareOrdinal(meshName, L"head") == 0)  //#LA
             modelTransform = m_teapotTransform * modelTransform;
 
         //
@@ -289,7 +291,7 @@ String^ Game::OnHitObject(int x, int y)
 
         auto name = ref new String(m->Name());
 
-        if(String::CompareOrdinal(name, L"Teapot_Node") == 0) 
+        if(String::CompareOrdinal(name, L"head") == 0)  //#LA
             meshTransform = teapotWorld;
 
         float t = 0;

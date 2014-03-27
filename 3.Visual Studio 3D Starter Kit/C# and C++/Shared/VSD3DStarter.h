@@ -1579,12 +1579,12 @@ namespace VSD3DStarter
             //
             FILE* fp = nullptr;
             _wfopen_s(&fp, meshFilename.c_str(), L"rb"); 
-            if (fp == nullptr)
+            if (fp == nullptr) //读取失败
             {
                 std::wstring error = L"Mesh file could not be opened " + meshFilename + L"\n";
                 OutputDebugString(error.c_str());
             }
-            else
+            else //读取文件成功
             {
                 //
                 // read how many meshes are part of the scene
@@ -1592,6 +1592,8 @@ namespace VSD3DStarter
                 UINT meshCount = 0;
                 fread(&meshCount, sizeof(meshCount), 1, fp);
 
+
+				//将所有的mesh都载入到loadedMeshes中
                 //
                 // for each mesh in the scene, load it from the file
                 //

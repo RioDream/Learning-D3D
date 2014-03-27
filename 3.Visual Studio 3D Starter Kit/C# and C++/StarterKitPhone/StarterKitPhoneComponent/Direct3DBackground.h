@@ -21,22 +21,31 @@ namespace StarterKitPhoneComponent
     public ref class Direct3DBackground sealed : public Windows::Phone::Input::Interop::IDrawingSurfaceManipulationHandler
     {
     public:
-        Direct3DBackground();
+        Direct3DBackground(); //构造函数
 
+
+		//CreateContentProvider（）函数构造一个IDrawingSurfaceBackgroundContentProvider
         Windows::Phone::Graphics::Interop::IDrawingSurfaceBackgroundContentProvider^ CreateContentProvider();
 
         // IDrawingSurfaceManipulationHandler
         virtual void SetManipulationHost(Windows::Phone::Input::Interop::DrawingSurfaceManipulationHost^ manipulationHost);
 
+		
         event RequestAdditionalFrameHandler^ RequestAdditionalFrame;
 
+		
         property Windows::Foundation::Size WindowBounds;
         property Windows::Foundation::Size NativeResolution;
         property Windows::Foundation::Size RenderResolution;
         property Windows::Graphics::Display::DisplayOrientations Orientation;
 
-        Platform::String^ OnHitObject(int x, int y);
+        //返回hit的物体名称
+		Platform::String^ OnHitObject(int x, int y);
+
+
         void ToggleHitEffect(Platform::String^ object);
+
+		//改变teapot的颜色
         void ChangeMaterialColor(Platform::String^ object, float r, float g, float b);
 
     protected:
@@ -46,6 +55,7 @@ namespace StarterKitPhoneComponent
         void OnPointerMoved(Windows::Phone::Input::Interop::DrawingSurfaceManipulationHost^ sender, Windows::UI::Core::PointerEventArgs^ args);
 
     internal:
+		//internal 关键字表明了下面四个函数很有可能是在 contentProvider中调用的
         HRESULT Connect(_In_ IDrawingSurfaceRuntimeHostNative* host, _In_ ID3D11Device1* device);
         void Disconnect();
 
