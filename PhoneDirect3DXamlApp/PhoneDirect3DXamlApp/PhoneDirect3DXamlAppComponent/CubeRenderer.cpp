@@ -1,6 +1,8 @@
 ﻿#include "pch.h"
 #include "CubeRenderer.h"
 
+#include<time.h> //remember to add an include to <time.h> to make the rand() method work.
+
 using namespace DirectX;
 using namespace Microsoft::WRL;
 using namespace Windows::Foundation;
@@ -10,6 +12,12 @@ CubeRenderer::CubeRenderer() :
 	m_loadingComplete(false),
 	m_indexCount(0)
 {
+	rotation = 0.0f;
+	rotationNegative = false;
+
+	srand((unsigned)time(0));
+
+	cubeColors = new XMFLOAT3[8];
 }
 
 void CubeRenderer::CreateDeviceResources()
@@ -166,8 +174,22 @@ void CubeRenderer::Update(float timeTotal, float timeDelta)
 	XMVECTOR at = XMVectorSet(0.0f, -0.1f, 0.0f, 0.0f);
 	XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
+	//m_constantBufferData.view = XMMatrixTranspose(XMMatrixLookAtRH(eye, at, up));
+	//m_constantBufferData.model = XMMatrixTranspose(XMMatrixRotationY(XMConvertToRadians(rotation)));
 	XMStoreFloat4x4(&m_constantBufferData.view, XMMatrixTranspose(XMMatrixLookAtRH(eye, at, up)));
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixRotationY(timeTotal * XM_PIDIV4)));
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixRotationY(XMConvertToRadians(rotation))));
+
+	if (rotationNegative)
+		rotation -= 1.0f;
+	else
+		rotation += 1.0f;
+
+	/*XMVECTOR eye = XMVectorSet(0.0f, 0.7f, 1.5f, 0.0f);
+	XMVECTOR at = XMVectorSet(0.0f, -0.1f, 0.0f, 0.0f);
+	XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+
+	XMStoreFloat4x4(&m_constantBufferData.view, XMMatrixTranspose(XMMatrixLookAtRH(eye, at, up)));
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixRotationY(timeTotal * XM_PIDIV4)));*/
 }
 
 void CubeRenderer::Render()
@@ -248,5 +270,53 @@ void CubeRenderer::Render()
 		m_indexCount,
 		0,
 		0
+		);
+}
+
+
+//#############LA###########
+void CubeRenderer::changeRotation()
+{
+	if (rotationNegative)
+		rotationNegative = false;
+	else
+		rotationNegative = true;
+}
+
+void CubeRenderer::changeColor()
+{
+	float r, g, b;
+
+	for (int i = 0; i < 8; i++)
+	{
+		r = (float)rand() / ((float)RAND_MAX / 255.0f);
+		g = (float)rand() / ((float)RAND_MAX / 255.0f);
+		b = (float)rand() / ((float)RAND_MAX / 255.0f);
+		cubeColors[i] = XMFLOAT3(r / 255.0f, g / 255.0f, b / 255.0f);
+	}
+
+
+	VertexPositionColor cubeVertices[] =
+	{
+		{ XMFLOAT3(-0.5f, -0.5f, -0.5f), cubeColors[0] },
+		{ XMFLOAT3(-0.5f, -0.5f, 0.5f), cubeColors[1] },
+		{ XMFLOAT3(-0.5f, 0.5f, -0.5f), cubeColors[2] },
+		{ XMFLOAT3(-0.5f, 0.5f, 0.5f), cubeColors[3] },
+		{ XMFLOAT3(0.5f, -0.5f, -0.5f), cubeColors[4] },
+		{ XMFLOAT3(0.5f, -0.5f, 0.5f), cubeColors[5] },
+		{ XMFLOAT3(0.5f, 0.5f, -0.5f), cubeColors[6] },
+		{ XMFLOAT3(0.5f, 0.5f, 0.5f), cubeColors[7] },
+	};
+
+	D3D11_SUBRESOURCE_DATA vertexBufferData = { 0 };
+	vertexBufferData.pSysMem = cubeVertices;
+	vertexBufferData.SysMemPitch = 0;
+	vertexBufferData.SysMemSlicePitch = 0;
+	DX::ThrowIfFailed(
+		m_d3dDevice->CreateBuffer(
+		&CD3D11_BUFFER_DESC(sizeof(cubeVertices), D3D11_BIND_VERTEX_BUFFER),
+		&vertexBufferData,
+		&m_vertexBuffer
+		)
 		);
 }

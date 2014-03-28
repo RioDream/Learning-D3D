@@ -105,3 +105,6 @@ void Direct3DBase::UpdateForWindowSizeChange(float width, float height)
 	m_windowBounds.Width  = width;
 	m_windowBounds.Height = height;
 }
+
+
+

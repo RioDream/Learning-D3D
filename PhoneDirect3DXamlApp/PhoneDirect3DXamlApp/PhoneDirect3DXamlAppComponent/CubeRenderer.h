@@ -21,6 +21,9 @@ ref class CubeRenderer sealed : public Direct3DBase
 public:
 	CubeRenderer();
 
+	void changeRotation(); //#LA
+	void changeColor();//#LA
+
 	// Direct3DBase methods.
 	virtual void CreateDeviceResources() override;
 	virtual void CreateWindowSizeDependentResources() override;
@@ -31,6 +34,12 @@ public:
 
 private:
 	bool m_loadingComplete;
+
+	float rotation; //#LA
+	boolean rotationNegative; //#LA
+	
+	DirectX::XMFLOAT3* cubeColors; //#LA
+	//XMFLOAT3* cubeColors; //这样会出现问题，在cpp的构造函数中进行赋值的时候出现unclared indentifier #LA
 
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;
 	Microsoft::WRL::ComPtr<ID3D11Buffer> m_vertexBuffer;

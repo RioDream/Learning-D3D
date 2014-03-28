@@ -50,5 +50,15 @@ namespace PhoneDirect3DXamlAppInterop
                 DrawingSurfaceBackground.SetBackgroundManipulationHandler(m_d3dBackground);
             }
         }
+
+        private void colorButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            m_d3dBackground.ChangeCubeColor();
+        }
+
+        private void rotationButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            m_d3dBackground.ChangeCubeRotation(); 
+        }
     }
 }

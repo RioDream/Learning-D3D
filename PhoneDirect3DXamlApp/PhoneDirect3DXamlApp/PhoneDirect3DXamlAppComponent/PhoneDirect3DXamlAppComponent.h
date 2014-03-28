@@ -16,9 +16,15 @@ public ref class Direct3DBackground sealed : public Windows::Phone::Input::Inter
 public:
 	Direct3DBackground();
 
+	//这里的函数是可以被C#直接调用的
+	void ChangeCubeRotation(); //#LA
+	void ChangeCubeColor(); //#LA
+
+
 	Windows::Phone::Graphics::Interop::IDrawingSurfaceBackgroundContentProvider^ CreateContentProvider();
 
 	// IDrawingSurfaceManipulationHandler
+	// 处理各种交互事件，重写父类的该接口
 	virtual void SetManipulationHost(Windows::Phone::Input::Interop::DrawingSurfaceManipulationHost^ manipulationHost);
 
 	event RequestAdditionalFrameHandler^ RequestAdditionalFrame;

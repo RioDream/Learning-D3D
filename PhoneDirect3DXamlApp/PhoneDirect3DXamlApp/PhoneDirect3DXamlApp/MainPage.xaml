@@ -15,6 +15,8 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <DrawingSurfaceBackgroundGrid x:Name="DrawingSurfaceBackground" Loaded="DrawingSurfaceBackground_Loaded">
+        <Button x:Name="rotationButton" Content="Change Rotation" HorizontalAlignment="Left" Height="72" Margin="124,10,0,0" VerticalAlignment="Top" Width="233" Click="rotationButton_Clicked"/>
+        <Button x:Name="colorButton" Content="Change Color" HorizontalAlignment="Left" Margin="99,686,0,0" VerticalAlignment="Top" Width="290" Click="colorButton_Clicked"/>
     </DrawingSurfaceBackgroundGrid>
 
 </phone:PhoneApplicationPage>

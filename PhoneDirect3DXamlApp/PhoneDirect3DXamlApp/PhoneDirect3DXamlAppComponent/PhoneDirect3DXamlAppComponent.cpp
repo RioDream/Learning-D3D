@@ -16,13 +16,16 @@ Direct3DBackground::Direct3DBackground() :
 {
 }
 
+
 IDrawingSurfaceBackgroundContentProvider^ Direct3DBackground::CreateContentProvider()
 {
+	//about make() http://msdn.microsoft.com/en-us/library/br244883.aspx
 	ComPtr<Direct3DContentProvider> provider = Make<Direct3DContentProvider>(this);
 	return reinterpret_cast<IDrawingSurfaceBackgroundContentProvider^>(provider.Get());
 }
 
 // IDrawingSurfaceManipulationHandler
+// 处理各种交互事件，重写父类的该接口
 void Direct3DBackground::SetManipulationHost(DrawingSurfaceManipulationHost^ manipulationHost)
 {
 	manipulationHost->PointerPressed +=
@@ -88,6 +91,18 @@ HRESULT Direct3DBackground::Draw(_In_ ID3D11Device1* device, _In_ ID3D11DeviceCo
 	RequestAdditionalFrame();
 
 	return S_OK;
+}
+
+//#LA
+void Direct3DBackground::ChangeCubeRotation()
+{
+	m_renderer->changeRotation();
+}
+
+//#LA
+void Direct3DBackground::ChangeCubeColor()
+{
+	m_renderer->changeColor();
 }
 
 }
