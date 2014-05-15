@@ -178,6 +178,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
     </FxCompile>
+    <FxCompile Include="..\Phong.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Shared\Assets\GlowEffect.dgsl">
@@ -197,14 +203,24 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="..\..\Shared\Assets\female head_fbx.FBX" />
+    <MeshContentTask Include="..\..\..\..\ConsoleApplication1\ConsoleApplication1\Scene1.fbx" />
+    <MeshContentTask Include="..\..\Shared\Assets\English_thatched_house.FBX" />
+    <MeshContentTask Include="..\..\Shared\Assets\female head_fbx.FBX">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">false</DeploymentContent>
+    </MeshContentTask>
     <MeshContentTask Include="..\..\Shared\Assets\gamelevel.fbx">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">false</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">false</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DeploymentContent>
     </MeshContentTask>
+    <MeshContentTask Include="..\..\Shared\Assets\M1911.fbx" />
     <MeshContentTask Include="..\..\Shared\Assets\teapot.fbx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\DieTexture.png" />
+    <Image Include="..\..\Shared\Assets\english_house_for_print.tif" />
+    <Image Include="..\..\Shared\Assets\english_house_texture.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />

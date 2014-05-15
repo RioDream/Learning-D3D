@@ -23,6 +23,7 @@ GameBase::GameBase()
 
 void GameBase::CreateDeviceResources()
 {
+	//empty
     __super::CreateDeviceResources();
 
     m_graphics.Initialize(m_d3dDevice.Get(), m_d3dContext.Get(), m_d3dFeatureLevel);
@@ -39,6 +40,7 @@ void GameBase::CreateDeviceResources()
 
     Initialize();
 }
+
 
 void GameBase::CreateWindowSizeDependentResources()
 {

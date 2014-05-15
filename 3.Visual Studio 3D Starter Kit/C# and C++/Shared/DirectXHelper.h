@@ -11,6 +11,9 @@
 #include <ppl.h>
 #include <ppltasks.h>
 
+
+
+
 // Helper utilities to make Win32 APIs work with exceptions.
 namespace DX
 {

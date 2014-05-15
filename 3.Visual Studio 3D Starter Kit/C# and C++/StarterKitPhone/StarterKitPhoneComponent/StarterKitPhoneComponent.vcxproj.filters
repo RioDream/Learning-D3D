@@ -7,6 +7,9 @@
     <FxCompile Include="..\..\Shared\Animation\SkinningVertexShader.hlsl">
       <Filter>Shared\Animation</Filter>
     </FxCompile>
+    <FxCompile Include="..\Phong.hlsl">
+      <Filter>Shared\Assets</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Direct3DContentProvider.cpp" />
@@ -75,6 +78,15 @@
     <MeshContentTask Include="..\..\Shared\Assets\female head_fbx.FBX">
       <Filter>Shared\Assets</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="..\..\Shared\Assets\M1911.fbx">
+      <Filter>Shared\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="..\..\..\..\ConsoleApplication1\ConsoleApplication1\Scene1.fbx">
+      <Filter>Shared\Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="..\..\Shared\Assets\English_thatched_house.FBX">
+      <Filter>Shared\Assets</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Shared\Assets\CubeUVImage.png">
@@ -83,5 +95,16 @@
     <None Include="..\..\Shared\Assets\GlowEffect.dgsl">
       <Filter>Shared\Assets</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\DieTexture.png">
+      <Filter>Shared\Assets</Filter>
+    </Image>
+    <Image Include="..\..\Shared\Assets\english_house_for_print.tif">
+      <Filter>Shared\Assets</Filter>
+    </Image>
+    <Image Include="..\..\Shared\Assets\english_house_texture.bmp">
+      <Filter>Shared\Assets</Filter>
+    </Image>
   </ItemGroup>
 </Project>

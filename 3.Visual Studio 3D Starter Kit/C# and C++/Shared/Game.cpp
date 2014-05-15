@@ -98,8 +98,11 @@ void Game::CreateWindowSizeDependentResources()
     m_graphics.UpdateLightConstants(m_lightConstants);
 }
 
+
+//读入模型
 void Game::Initialize()
 {
+	//读入周围四个物体的模型，放在m_meshModels中
     Mesh::LoadFromFile(
         m_graphics, 
         L"gamelevel.cmo", 
@@ -114,23 +117,32 @@ void Game::Initialize()
     //
     std::vector<Mesh*> tempModels;
 
-    //
+    //读入中间物体的模型和动画
 	Mesh::LoadFromFile(
         m_graphics, 
-        L"female head_fbx.cmo", 
+		//L"teapot.cmo",
+		//L"gamelevel.cmo",
+		L"English_thatched_house.cmo",
         L"", 
-        L"Folder", 
+        L"", 
         tempModels
         );
 
-
-    m_meshModels.push_back(tempModels[2]); //#LA
+	//选一个放到m_meshModels里面
+    m_meshModels.push_back(tempModels[0]); //#LA
 
     //
     // create teapot transform
-    //
-    m_teapotTransform = XMMatrixScaling(0.044f, 0.044f, 0.044f) * XMMatrixTranslation(0.0f, -1.6f, 0.0f);
+    // 对中间物体进行缩放和平移
+	//
+	//sphere
+	m_teapotTransform = XMMatrixScaling(60.015f, 60.015f, 60.015f) * XMMatrixTranslation(-9.0f, 64.0f, -21.0f);
+	
+	//m_teapotTransform = XMMatrixScaling(1.015f, 1.015f, 1.015f) * XMMatrixTranslation(9.0f, -64.0f, 21.0f);
+	//m_teapotTransform = XMMatrixScaling(0.044f, 0.044f, 0.044f) * XMMatrixTranslation(0.0f, -1.6f, 0.0f);
 
+
+	//查看有没有animate，如果有，改变tag的值
     for (Mesh* m : m_meshModels)
     {
         if (m->BoneInfoCollection().empty() == false)
@@ -142,7 +154,8 @@ void Game::Initialize()
         }
     }
 
-    m_skinnedMeshRenderer.Initialize(m_d3dDevice.Get(), m_d3dContext.Get());
+	//初始化renderer
+    m_skinnedMeshRenderer.Initialize(m_d3dDevice.Get());
 
     // each mesh object has it's own "time" used to control glow effect
     m_time.clear();
@@ -152,6 +165,7 @@ void Game::Initialize()
     }
 }
 
+//更新本身的动画和旋转动画
 void Game::Update(float timeTotal, float timeDelta)
 {
     // update animated models
@@ -196,11 +210,16 @@ void Game::Render()
     XMMATRIX rotation = XMMatrixRotationY(m_rotation);
     for (UINT i = 0; i < m_meshModels.size(); i++)
     {
+		XMMATRIX preTransform = XMMatrixScaling(1.015f, 1.015f, 1.015f);
         XMMATRIX modelTransform = rotation;
 
         String^ meshName = ref new String(m_meshModels[i]->Name());
-        if (String::CompareOrdinal(meshName, L"head") == 0)  //#LA
-            modelTransform = m_teapotTransform * modelTransform;
+		if (String::CompareOrdinal(meshName, L"head") == 0 && i == 4)  //#LA
+		{
+			//
+			modelTransform = modelTransform*preTransform;
+			//modelTransform = m_teapotTransform * modelTransform;
+		}
 
         //
         // setup misc constants for our scene

@@ -41,9 +41,9 @@ public:
     {
     }
 
-    void Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext)
+    void Initialize(ID3D11Device* device)
     {
-        UNREFERENCED_PARAMETER (deviceContext);
+        //UNREFERENCED_PARAMETER (deviceContext);
 
         m_skinningShader = nullptr;
         m_boneConstantBuffer = nullptr;
