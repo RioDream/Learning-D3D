@@ -1096,6 +1096,8 @@ namespace VSD3DStarter
             desc.MiscFlags = 0;
             m_device->CreateTexture2D(&desc, nullptr, &m_nullTexture);
 
+
+			//°ÉÕâ¾äÅ²µ½ Render
             INT32 white = 0xffffffff;
             m_deviceContext->UpdateSubresource(m_nullTexture.Get(), 0, nullptr, &white, sizeof(white), sizeof(white));
 

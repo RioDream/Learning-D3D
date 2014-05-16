@@ -34,9 +34,10 @@ void GameBase::CreateDeviceResources()
     d3dRas.MultisampleEnable = true;
     d3dRas.AntialiasedLineEnable = true;
 
-    ComPtr<ID3D11RasterizerState> p3d3RasState;
-    m_d3dDevice->CreateRasterizerState(&d3dRas, &p3d3RasState);
-    m_d3dContext->RSSetState(p3d3RasState.Get());
+	//这些可以注释掉的 ！！！
+    //ComPtr<ID3D11RasterizerState> p3d3RasState;
+    //m_d3dDevice->CreateRasterizerState(&d3dRas, &p3d3RasState);
+    //m_d3dContext->RSSetState(p3d3RasState.Get());
 
     Initialize();
 }

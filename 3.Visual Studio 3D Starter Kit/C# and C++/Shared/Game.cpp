@@ -95,7 +95,7 @@ void Game::CreateWindowSizeDependentResources()
     m_lightConstants.LightDirection[0].w = 0;
     m_lightConstants.LightSpecularIntensity[0].x = 2;
 
-    m_graphics.UpdateLightConstants(m_lightConstants);
+
 }
 
 
@@ -184,6 +184,11 @@ void Game::Update(float timeTotal, float timeDelta)
 void Game::Render()
 {
     GameBase::Render();
+	
+	
+	//去掉这一句，就变暗了, 这句原来是在 Create里面的 ，挪到这里来了
+	m_graphics.UpdateLightConstants(m_lightConstants);
+
 
     // clear
     m_d3dContext->OMSetRenderTargets(
@@ -196,13 +201,14 @@ void Game::Render()
         m_d3dRenderTargetView.Get(),
         DirectX::Colors::DarkSlateGray
         );
-
+	
     m_d3dContext->ClearDepthStencilView(
         m_d3dDepthStencilView.Get(),
         D3D11_CLEAR_DEPTH,
         1.0f,
         0
         );
+	
 
     //
     // draw our scene models
@@ -225,7 +231,7 @@ void Game::Render()
         // setup misc constants for our scene
         //
         m_miscConstants.Time = m_time[i];
-        m_graphics.UpdateMiscConstants(m_miscConstants);
+        //m_graphics.UpdateMiscConstants(m_miscConstants);
 
         //
         // draw
