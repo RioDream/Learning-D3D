@@ -105,7 +105,7 @@ void Game::Initialize()
 	//读入周围四个物体的模型，放在m_meshModels中
     Mesh::LoadFromFile(
         m_graphics, 
-        L"gamelevel.cmo", 
+        L"English_thatched_house.cmo", 
         L"", 
         L"Folder", 
         m_meshModels

@@ -12,3 +12,5 @@ Because the Windows SDK is the primary developer SDK for Windows, DirectX is now
 [MSDN](http://msdn.microsoft.com/en-us/library/windows/desktop/bb153264(v=vs.85).aspx)
 
 [CSDN D3D专栏 更深入一些](http://blog.csdn.net/BonChoix/article/category/1249753/2)
+
+[CSDN 管线过程](http://blog.csdn.net/iceguner/article/details/8645297)

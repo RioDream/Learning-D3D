@@ -18,6 +18,10 @@
 
 #include "DDSTextureLoader.h"
 
+
+//debug
+//#include "DXProgrammableCapture.h" // Included in Windows SDK
+
 namespace VSD3DStarter
 {
 
